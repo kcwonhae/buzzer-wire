@@ -1,0 +1,36 @@
+ #include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 7, 6, 5, 4);
+
+const int startPin = 8; 
+const int endPin = 9; 
+const int buzzer = 13;
+
+
+int start, end_;
+
+void setup(){
+lcd.begin(16,2);
+pinMode(buzzer, OUTPUT); 
+pinMode(startPin, INPUT_PULLUP); 
+pinMode(endPin, INPUT_PULLUP);
+}
+void loop(){
+
+start = digitalRead(startPin); 
+end_ = digitalRead(endPin);
+
+if (start == LOW && end_== LOW ){ 
+digitalWrite(buzzer, HIGH); 
+delay(1000); 
+digitalWrite(buzzer, LOW); 
+lcd.setCursor(0,0); 
+lcd.print("Try Again"); 
+Serial.print("Try Again"); 
+
+} 
+else if (start == HIGH && end_== LOW){ 
+lcd.setCursor(0,0); 
+lcd.print("Well Done"); 
+Serial.print("Well Done"); 
+}
+}
